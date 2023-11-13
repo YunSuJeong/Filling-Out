@@ -1,9 +1,9 @@
 # 프로시저 실습
 DB툴-sqlDeveloper, 오라클 11g
-
+  
 ### 🔒도전과제 : 부서코드를 입력받아 해당 부서 직원들의 월급합을 구하는 프로시저를 작성하여라
-
-
+  
+  
 #### step1. 준비 - 데이터를 세팅해보자
 부서테이블과 직원테이블을 만들어줍니다. 데이터도 넣어주세요.
 ```
@@ -46,10 +46,11 @@ INSERT INTO SAMPLE_EMP VALUES (7876,'ADAMS','CLERK',7788,TO_DATE('1983-01-15','Y
 INSERT INTO SAMPLE_EMP VALUES (7934,'MILLER','CLERK',7782,TO_DATE('1982-01-11','YYYY-MM-DD'),1300,NULL,10,NULL);
 ```
 [출처] https://java7.tistory.com/164
-
+  
+  
 #### step2. 설계 & 로직 고민
-
-
+  
+  
 #### step3. 구현
 ```
 create or replace procedure SAMPLE_SUM_SAL(
@@ -74,9 +75,10 @@ EXCEPTION when others then
 END;
 
 ```
-
+  
 #### 결과 이미지
 ![프로시저_결과](https://github.com/YunSuJeong/Filling-Out/assets/91771574/4af03b4b-d6f8-4613-abf4-85e0b1d91507)
+  
 
-
-### 어.? 포인트
+#### 어.? 포인트
+  
