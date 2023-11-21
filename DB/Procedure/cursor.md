@@ -36,6 +36,21 @@ END;
 
 ```
 
+```
+CREATE OR REPLACE PROCEDURE AUTO_UPDATE_CD (
+    -- in/out 변수 선언
+    IN_PRGM_TYPE_CD varchar2
+) IS
+    -- 프로시저 멤버변수 선언
+    AUC_SDDPC_CD varchar2;
+    AUC_SDDPC_KND_CD varchar2;
+    AUC_YY varchar2(4);
+BEGIN
+    
+EXCEPTION WHEN OTHERS THEN 
+END;
+```
+
 <br><br>
 [참고출처]  
 https://bacha.tistory.com/20  
