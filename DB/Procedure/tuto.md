@@ -75,6 +75,9 @@ EXCEPTION when others then
 END;
 
 ```
+
+#### step4. 프로시저 실행
+
   
 #### 결과 이미지
 ![프로시저_결과](https://github.com/YunSuJeong/Filling-Out/assets/91771574/4af03b4b-d6f8-4613-abf4-85e0b1d91507)
