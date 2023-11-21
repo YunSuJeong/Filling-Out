@@ -37,6 +37,8 @@ END;
 ```
 
 ```
+-- 0001 : A, 0002 : B, 0003 : C
+
 CREATE OR REPLACE PROCEDURE AUTO_UPDATE_CD (
     -- in/out 변수 선언
     IN_PRGM_TYPE_CD varchar2
@@ -46,6 +48,16 @@ CREATE OR REPLACE PROCEDURE AUTO_UPDATE_CD (
     AUC_SDDPC_KND_CD varchar2;
     AUC_YY varchar2(4);
 BEGIN
+    IF IN_PRGM_TYPE_CD = '0001' THEN
+        AUC_SDDPC_CD := 'P'
+        AUC_SDDPC_KND_CD := '0001'
+    ELSEIF IN_PRGM_TYPE_CD = '0002' THEN
+        AUC_SDDPC_CD := 'A'
+        AUC_SDDPC_KND_CD := '0001'
+    ELSE
+        AUC_SDDPC_CD := 'G'
+    END IF;
+
     
 EXCEPTION WHEN OTHERS THEN 
 END;
@@ -55,3 +67,8 @@ END;
 [참고출처]  
 https://bacha.tistory.com/20  
 https://coding-factory.tistory.com/455  
+
+#### 의문점
+Q1. 커서 선언은 선언부에서만 가능한건지,, BEGIN안에서 DECLARE하면 안되나.?
+Q2. FOR LOOP도 커서였던거임...?  
+https://blog.kjslab.com/20  
