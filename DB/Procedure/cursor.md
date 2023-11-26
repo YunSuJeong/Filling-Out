@@ -158,6 +158,7 @@ END;
 [참고출처]  
 https://bacha.tistory.com/20  
 https://coding-factory.tistory.com/455  
+https://logical-code.tistory.com/54  
 
 #### 의문점
 Q1. 커서 선언은 선언부에서만 가능한건지,, BEGIN안에서 DECLARE하면 안되나.?
