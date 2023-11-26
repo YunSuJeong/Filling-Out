@@ -12,13 +12,12 @@
 > 그러나 각 프로그램마다 년도를 구분하여 update해줘야 했기때문에 FOR LOOP블록을 조건 변경해가며 10번이상 실행해줘야했다,,(실수할까봐 쫄고..귀찮았음..)
 > 그렇게 2주의 시간이 흐르고 맞이한 스터디에서 처음 알게된 '커서'의 존재,,  
 > 이거로 실습하면 딱이겠다 싶어 스터디 과제로 선정하게 되었다. 땅땅
-
-<br><br><br>
+<br>
 
 <details>
-<summary>기존 코드값 update 쿼리</summary>
-<div markdown="1">
-    ```sql
+<summary>기존 코드값 update 쿼리보기</summary>
+<div>
+    
     /* A프로그램 */
     select TO_CHAR(input_dm, 'yyyy') from SY_DICA_D_PGM_CODE where SDDPC_KND_CD = '0001' group by TO_CHAR(input_dm, 'yyyy') order by TO_CHAR(input_dm, 'yyyy');
     
@@ -63,9 +62,8 @@
                STCM_SEQ = stcm.STCM_SEQ;
         END LOOP;
     END;
-    ```
-    </div>
-    </details>
+</div>
+</details>
 
 #### 로직 설계
 - 고려사항  
