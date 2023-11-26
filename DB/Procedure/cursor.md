@@ -48,6 +48,7 @@ CREATE OR REPLACE PROCEDURE AUTO_UPDATE_CD (
     AUC_SDDPC_KND_CD varchar2;
     AUC_YY varchar2(4);
 BEGIN
+    /* 프로그램 유형따라 조건설정 */
     IF IN_PRGM_TYPE_CD = '0001' THEN
         AUC_SDDPC_CD := 'P'
         AUC_SDDPC_KND_CD := '0001'
@@ -58,6 +59,57 @@ BEGIN
         AUC_SDDPC_CD := 'G'
     END IF;
 
+    /* 코드 자동 업데이트 로직 시작 */
+    IF( IN_PRGM_TYPE_CD = '0001' OR IN_PRGM_TYPE_CD = '0002' ) THEN 
+        FOR auto IN ( select TO_CHAR(input_dm, 'yyyy') input_dm from SY_DICA_D_PGM_CODE where SDDPC_KND_CD = AUC_SDDPC_KND_CD group by TO_CHAR(input_dm, 'yyyy') order by TO_CHAR(input_dm, 'yyyy') ) LOOP
+    
+            /* 자동으로 코드를 부여하기위한 시퀀스 생성 */
+            CREATE SEQUENCE UPDATE_SAMPLE_SEQ 
+            INCREMENT BY 1
+            START WITH 1
+            MINVALUE 1; 
+    
+            /* 년도마다 코드 update */
+            FOR sddpc IN (SELECT SDDPC_SEQ, TO_CHAR(input_dm, 'yy') AS YY FROM SY_DICA_D_PGM_CODE WHERE SDDPC_KND_CD = AUC_SDDPC_KND_CD and TO_CHAR(input_dm, 'yyyy') = auto.INPUT_DM ORDER BY INPUT_DM) LOOP
+                UPDATE
+                    SY_DICA_D_PGM_CODE
+                SET
+                    SDDPC_CD = AUC_SDDPC_CD || sddpc.YY || LPAD(UPDATE_SAMPLE_SEQ.NEXTVAL, 3, '0') 
+                WHERE
+                   SDDPC_SEQ = sddpc.SDDPC_SEQ
+                   AND SDDPC_KND_CD = AUC_SDDPC_KND_CD;
+            END LOOP;
+    
+            /* 매년 코드 시작은 1부터 시작되어야하기 때문에 시퀀스 삭제 */
+            DROP SEQUENCE UPDATE_SAMPLE_SEQ;
+            
+        END LOOP;
+    ELSE
+        FOR auto IN ( select TO_CHAR(input_dm, 'yyyy') AS INPUT_DM from SY_TS_CODE_MNGT GROUP BY TO_CHAR(INPUT_DM, 'yyyy') order by TO_CHAR(INPUT_DM, 'yyyy') ) LOOP
+
+            /* 자동으로 코드를 부여하기위한 시퀀스 생성 */
+            CREATE SEQUENCE UPDATE_SAMPLE_SEQ 
+            INCREMENT BY 1
+            START WITH 1
+            MINVALUE 1; 
+
+            BEGIN
+                FOR stcm IN (SELECT STCM_SEQ, TO_CHAR(INPUT_DM, 'yy') AS YY FROM SY_TS_CODE_MNGT WHERE TO_CHAR(INPUT_DM, 'yyyy') = auto.INPUT_DM ORDER BY INPUT_DM) LOOP
+                    UPDATE
+                        SY_TS_CODE_MNGT
+                    SET
+                        STCM_CD = AUC_SDDPC_CD || stcm.YY || LPAD(UPDATE_SAMPLE_SEQ.NEXTVAL, 3, '0')
+                    WHERE
+                       STCM_SEQ = stcm.STCM_SEQ;
+                END LOOP;
+            END;
+
+            /* 매년 코드 시작은 1부터 시작되어야하기 때문에 시퀀스 삭제 */
+            DROP SEQUENCE UPDATE_SAMPLE_SEQ;
+
+        END LOOP;
+
+    END IF;
     
 EXCEPTION WHEN OTHERS THEN 
 END;
@@ -70,5 +122,5 @@ https://coding-factory.tistory.com/455
 
 #### 의문점
 Q1. 커서 선언은 선언부에서만 가능한건지,, BEGIN안에서 DECLARE하면 안되나.?
-Q2. FOR LOOP도 커서였던거임...?  
+Q2. FOR LOOP도 커서였던거임...? 와아  
 https://blog.kjslab.com/20  
