@@ -15,53 +15,57 @@
 
 <br><br><br>
 
-#### 기존 코드값 update 쿼리
-```
-/* A프로그램 */
-select TO_CHAR(input_dm, 'yyyy') from SY_DICA_D_PGM_CODE where SDDPC_KND_CD = '0001' group by TO_CHAR(input_dm, 'yyyy') order by TO_CHAR(input_dm, 'yyyy');
-
--- 년도마다 아래 블록 년도 조건 변경 + 시퀀스 DROP 후 재생성하여 실행줬어야함
-BEGIN
-    FOR sddpc IN (SELECT SDDPC_SEQ, TO_CHAR(input_dm, 'yy') AS YY FROM SY_DICA_D_PGM_CODE WHERE SDDPC_KND_CD = '0001' and TO_CHAR(input_dm, 'yyyy') = '2020' ORDER BY INPUT_DM) LOOP
-        UPDATE
-            SY_DICA_D_PGM_CODE
-        SET
-            SDDPC_CD = 'P' || sddpc.YY || LPAD(UPDATE_SAMPLE_SEQ.NEXTVAL, 3, '0') 
-        WHERE
-           SDDPC_SEQ = sddpc.SDDPC_SEQ
-           AND SDDPC_KND_CD = '0001';
-    END LOOP;
-END;
-
-/* B프로그램 */
-select TO_CHAR(input_dm, 'yyyy') from SY_DICA_D_PGM_CODE where SDDPC_KND_CD = '0001' group by TO_CHAR(input_dm, 'yyyy') order by TO_CHAR(input_dm, 'yyyy');
-
-BEGIN
-    FOR sddpc IN (SELECT SDDPC_SEQ, TO_CHAR(input_dm, 'yy') AS YY FROM SY_DICA_D_PGM_CODE WHERE SDDPC_KND_CD = '0002' and TO_CHAR(input_dm, 'yyyy') = '2023' ORDER BY INPUT_DM) LOOP
-        UPDATE
-            SY_DICA_D_PGM_CODE
-        SET
-            SDDPC_CD = 'A' || sddpc.YY || LPAD(UPDATE_SAMPLE_SEQ.NEXTVAL, 3, '0')
-        WHERE
-           SDDPC_SEQ = sddpc.SDDPC_SEQ
-           AND SDDPC_KND_CD = '0002';
-    END LOOP;
-END;
-
-/* C프로그램 */
-select TO_CHAR(input_dm, 'yyyy'), count(1) from SY_TS_CODE_MNGT group by TO_CHAR(input_dm, 'yyyy') order by TO_CHAR(input_dm, 'yyyy');
-
-BEGIN
-    FOR stcm IN (SELECT STCM_SEQ, TO_CHAR(input_dm, 'yy') AS YY FROM SY_TS_CODE_MNGT WHERE TO_CHAR(input_dm, 'yyyy') = '2023' ORDER BY INPUT_DM) LOOP
-        UPDATE
-            SY_TS_CODE_MNGT
-        SET
-            STCM_CD = 'G' || stcm.YY || LPAD(UPDATE_SAMPLE_SEQ.NEXTVAL, 3, '0')
-        WHERE
-           STCM_SEQ = stcm.STCM_SEQ;
-    END LOOP;
-END;
-```
+<details>
+<summary>기존 코드값 update 쿼리</summary>
+<div markdown="1">
+    ```sql
+    /* A프로그램 */
+    select TO_CHAR(input_dm, 'yyyy') from SY_DICA_D_PGM_CODE where SDDPC_KND_CD = '0001' group by TO_CHAR(input_dm, 'yyyy') order by TO_CHAR(input_dm, 'yyyy');
+    
+    -- 년도마다 아래 블록 년도 조건 변경 + 시퀀스 DROP 후 재생성하여 실행줬어야함
+    BEGIN
+        FOR sddpc IN (SELECT SDDPC_SEQ, TO_CHAR(input_dm, 'yy') AS YY FROM SY_DICA_D_PGM_CODE WHERE SDDPC_KND_CD = '0001' and TO_CHAR(input_dm, 'yyyy') = '2020' ORDER BY INPUT_DM) LOOP
+            UPDATE
+                SY_DICA_D_PGM_CODE
+            SET
+                SDDPC_CD = 'P' || sddpc.YY || LPAD(UPDATE_SAMPLE_SEQ.NEXTVAL, 3, '0') 
+            WHERE
+               SDDPC_SEQ = sddpc.SDDPC_SEQ
+               AND SDDPC_KND_CD = '0001';
+        END LOOP;
+    END;
+    
+    /* B프로그램 */
+    select TO_CHAR(input_dm, 'yyyy') from SY_DICA_D_PGM_CODE where SDDPC_KND_CD = '0001' group by TO_CHAR(input_dm, 'yyyy') order by TO_CHAR(input_dm, 'yyyy');
+    
+    BEGIN
+        FOR sddpc IN (SELECT SDDPC_SEQ, TO_CHAR(input_dm, 'yy') AS YY FROM SY_DICA_D_PGM_CODE WHERE SDDPC_KND_CD = '0002' and TO_CHAR(input_dm, 'yyyy') = '2023' ORDER BY INPUT_DM) LOOP
+            UPDATE
+                SY_DICA_D_PGM_CODE
+            SET
+                SDDPC_CD = 'A' || sddpc.YY || LPAD(UPDATE_SAMPLE_SEQ.NEXTVAL, 3, '0')
+            WHERE
+               SDDPC_SEQ = sddpc.SDDPC_SEQ
+               AND SDDPC_KND_CD = '0002';
+        END LOOP;
+    END;
+    
+    /* C프로그램 */
+    select TO_CHAR(input_dm, 'yyyy'), count(1) from SY_TS_CODE_MNGT group by TO_CHAR(input_dm, 'yyyy') order by TO_CHAR(input_dm, 'yyyy');
+    
+    BEGIN
+        FOR stcm IN (SELECT STCM_SEQ, TO_CHAR(input_dm, 'yy') AS YY FROM SY_TS_CODE_MNGT WHERE TO_CHAR(input_dm, 'yyyy') = '2023' ORDER BY INPUT_DM) LOOP
+            UPDATE
+                SY_TS_CODE_MNGT
+            SET
+                STCM_CD = 'G' || stcm.YY || LPAD(UPDATE_SAMPLE_SEQ.NEXTVAL, 3, '0')
+            WHERE
+               STCM_SEQ = stcm.STCM_SEQ;
+        END LOOP;
+    END;
+    ```
+    </div>
+    </details>
 
 #### 로직 설계
 - 고려사항  
