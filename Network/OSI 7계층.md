@@ -1,7 +1,7 @@
 
 # 계층별 프로토콜 종류 및 특징
 
-[OSI 7계층 개념 정리](https://github.com/YunSuJeong/BOOK/blob/main/network/%EB%AA%A8%EB%91%90%EC%9D%98%20%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC(Network%20for%20everyone)/chap2.%20%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC%20%EA%B8%B0%EB%B3%B8%EA%B7%9C%EC%B9%99.md)
+[OSI 7계층 개념 정리](https://github.com/YunSuJeong/BOOK/blob/main/network/%EB%AA%A8%EB%91%90%EC%9D%98%20%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC(Network%20for%20everyone)/chap2.%20%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC%20%EA%B8%B0%EB%B3%B8%EA%B7%9C%EC%B9%99.md)  
 
 ## 7. Application Layer 
 ### HTTP(HyperText Transfer Protocol)
@@ -75,3 +75,8 @@
   - 패킷교환망에 대한 엑세스 표  
 ### X.21
   - 회선교환망에 대한 액세스 표준  
+   
+   
+
+[ 출처 ]   
+https://needjarvis.tistory.com/158
