@@ -75,8 +75,21 @@
   - 패킷교환망에 대한 엑세스 표  
 ### X.21
   - 회선교환망에 대한 액세스 표준  
-   
-   
-
+  
 [ 출처 ]   
-https://needjarvis.tistory.com/158
+https://needjarvis.tistory.com/158  
+
+# 계층별 데이터 단위
+|계층|전송단위(PDU)|장비|
+|---|---|---|
+|7. 응용|Message||
+|6. 표현|Message||
+|5. 세션|Message||
+|4. 전송|Segment/Datagram|게이트웨이, L4스위치|
+|3. 네트워크|Packet|라우터, L3스위치|
+|2. 데이터링크|Frame|브릿지, 스위치|
+|1. 물리|Bit|허브, 리피터|
+  
+[ 출처 ]  
+https://hahahoho5915.tistory.com/12  
+https://backendcode.tistory.com/167  https://velog.io/@mingkimk/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EA%B3%84%EC%B8%B5%EB%B3%84-%ED%94%84%EB%A1%9C%ED%86%A0%EC%BD%9CLayer-Protocol
