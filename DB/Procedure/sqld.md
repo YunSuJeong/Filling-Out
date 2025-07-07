@@ -1,5 +1,5 @@
 ![image](https://github.com/user-attachments/assets/8d25c2fb-3dfd-49b2-b634-365662ca6b4b)# SQLD 자격증 보수교육 정리
-> 보수교육링크 : https://www.dataq.or.kr/www/mypage/reedu/list.do
+> 보수교육링크 : 한국데이터산업진흥원 https://www.dataq.or.kr/www/mypage/reedu/list.do
 
 ## 데이터 모델링의 이해
 - 정의
@@ -154,4 +154,94 @@
 ### 서브 쿼리와 성능
 > 스칼라 서브쿼리는 메인 쿼리의 결과에 대해 LOOP방식으로 동작하기 때문에 사용상 주의가 필요하지만, 특정한 조건에서는 좋은 성능을 보여줌
 
+- 코드값을 이용하여 코드명을 조회하여 출력하는 방법 
+<img src="https://github.com/user-attachments/assets/3eef1cc8-7daa-4de3-9862-8081a66e2dd2" width="700" height="550"/>
+
+- 특히, Stored Function은 overhead가 심하기 때문에 레코드 목록에서는 사용하지 않는 것이 좋음
+![image](https://github.com/user-attachments/assets/7ba23764-520e-41bb-87ef-014b79189fde)
+
+### NOT IN, NOT EXISTS와 NULL
+> NOT IN과 NOT EXISTS는 NULL이 포함된 경우 예상과 다른 결과가 나올 수 있어 사용상 주의가 필요함
+
+<img src="https://github.com/user-attachments/assets/54ef0cf1-e40c-4329-8187-1f950a9893f4" width="300" height="450"/>
+- IN과 EXISTS는 동일하게 아래와 같은 결과를 보임
+<img src="https://github.com/user-attachments/assets/90beffe6-e121-4bc0-ad4d-442f9aa6ab0d" width="300" height="200"/>
+
+- 그러나 NOT IN, NOT EXISTS일 때 다른 결과를 보여줌
+![image](https://github.com/user-attachments/assets/e1737c05-c55c-4fea-84c2-59fb42ecb631)
+
+### GROUP FUNCTION
+> 그룹별 소계를 구하거나 GROUPING한 결과의 TOTAL 값을 함께 확인하고 싶을 때 GROUP FUNCTION을 사용
+
+![image](https://github.com/user-attachments/assets/dcebc7a4-6cb2-45f9-abe2-0ccff995fd34)
+
+### WINDOW FUNCTION
+> 윈도우 함수는 다른 행의 값을 구하거나 다른 행과의 연산을 수행하는 함수이며, 복잡하거나 자원을 많이 사용하는 튜닝 기법들을 대체할 수 있다.  
+> ex) 기존에 집합을 2번 읽어서 처리해야 했던 쿼리
+
+![image](https://github.com/user-attachments/assets/307983cd-7730-4502-a5c2-e0603c87e8d5)
+- 문법 및 사용방법
+![image](https://github.com/user-attachments/assets/2dbe17b5-5249-408f-b58a-4b4bb716cf23)
+
+### 페이징 쿼리
+> 3-Tier 환경에서 대량의 결과집합을 조회할 때 페이징 처리 기법을 활용함  
+> 성능 관점에서는 SORT 연산이 발생하지 않도록 하는 것이 최선
+> 오용되는 경우가 많으므로 우선 정확한 쿼리를 작성하는 연습을 해야함
+
+![image](https://github.com/user-attachments/assets/fc536c79-3284-4bdc-8586-6f60e8e50ee3)
+
+### 계층형 쿼리
+> 계층형 쿼리는 조직도와 같은 재귀관계 데이터를 표현하는데 사용하며, 일정한 수를 가진 임의의 집합을 만들 때도 유용
+
+![image](https://github.com/user-attachments/assets/fb7f792b-3ad0-47b2-8f0e-8ae345da2f7d)
+
+### PIVOT과 UNPIVOT
+> PIVOT은 행을 열로 전환하면서 집계
+
+![image](https://github.com/user-attachments/assets/67d001a4-da3b-4273-8d0e-d7c35222f794)
+
+> UNPIVOT은 열을 행으로 전환, 1차 정규형 위반인 데이터를 JOIN 대상의 집합 레벨로 맞추기 위한 방법 등으로 사용
+
+![image](https://github.com/user-attachments/assets/6f2833c9-5aa7-4f06-8cea-9b35633bf9cb)
+
+### 정규표현식
+> 정규표현식은 특정한 패턴의 문자열을 검색하고 추출, 변조하는데 유용
+
+- 정규표현식 조건과 함수
+  - 조건 : REGEXP_LIKE (true/false 반환)
+  - 함수 : REGEXP_COUNT (11g), REGEXP_INSTR, REGEXP_REPLACE, REGEXP_SUBSTR
+
+- 정규표현식 연산자
+![image](https://github.com/user-attachments/assets/470364ee-b54b-47dd-85b3-da2fb2db1b65)
+
+- POSIX
+  - POSIX(Portable Operating System Interface) 문자 클래스를 지원
+  - 시스템 간 호환성과 문자 리스트 사용의 편의성을 위해 미리 정의된 문자 클래스
+  - 반드시 대괄호([])안에서 즉 문자 리스트 내부에서 사용해야함, 개별 문자와 조합해서 사용이 가능함
+<img src="https://github.com/user-attachments/assets/50ab4d5a-5517-4c27-a51a-9f02e377fa9e" width="600" height="700"/>
+
+![image](https://github.com/user-attachments/assets/ac866897-04a6-43c3-b708-c1052e276bcf)
+
+- 심화 사례
+![image](https://github.com/user-attachments/assets/a8877df6-b9b1-40a1-b7b8-894f1d58f6bf)
+
+
 ## 관리 구문
+
+### SQL 종류
+> SQL은 DML, DDL, DCL, TCL로 구분할 수 있다
+
+![image](https://github.com/user-attachments/assets/40c0d792-a5ca-451e-a0ee-2962d605fc4f)
+
+#### MERGE문
+> LOOP를 이용한 조건식 처리나 수정가능 조인 뷰를 대체할 수 있음
+> 여러 테이블에 INSERT가 필요한 워크로드에 다중 테이블 INSERT를 활용할 수 있음
+
+![image](https://github.com/user-attachments/assets/58c8f420-1645-4845-91e5-fc584f8ad7ae)
+
+### 계정과 권한
+> 계정은 스키마 계정, 어플리케이션 계정, 사용자 계정으로 구분하여 사용함  
+> 관리의 편이성을 위해 ROLE을 통해 OBJECT에 대한 권한을 갖음  
+> ROLE을 통해 권한을 부여하는 방식을 RBAC(Role Based Access Control)이라고 함
+
+![image](https://github.com/user-attachments/assets/1ba9f2bd-e0ed-400e-8dcb-e3c1917acdf8)
