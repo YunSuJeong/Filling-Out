@@ -1,4 +1,5 @@
 # Components
+🔗 공식문서 사이트 : https://reactnative.dev/docs/components-and-apis
 > 화면을 구성하는 **조각(UI) 을 하나의 함수로 만든 것**  
 > → 그리고 그 함수를 HTML 태그처럼 써서 화면에 붙일 수 있다
 
