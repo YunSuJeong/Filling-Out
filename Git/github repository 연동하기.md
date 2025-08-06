@@ -1,4 +1,4 @@
-<img width="859" height="43" alt="image" src="https://github.com/user-attachments/assets/7dd83ff2-0d91-481b-bd86-627f0b638690" /># github repository 연동하기
+# github repository 연동하기
 *📌 OS환경 : Mac OS**
 
 ### 순서
